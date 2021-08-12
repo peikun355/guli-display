@@ -14,6 +14,29 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import animated from 'animate.css';
+
+//引用富文本编辑器
+
+import VueQuillEditor from 'vue-quill-editor'
+
+//引入富文本css
+
+// require styles
+
+import 'quill/dist/quill.core.css'
+
+import 'quill/dist/quill.snow.css'
+
+import 'quill/dist/quill.bubble.css'
+
+//富文本编辑器添加实例
+
+Vue.use(VueQuillEditor, /* { default global options } */)
+
+
+
+Vue.use(animated)
 
 /**
  * If you don't want to use mock-server
@@ -34,6 +57,7 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
 
 new Vue({
   el: '#app',
