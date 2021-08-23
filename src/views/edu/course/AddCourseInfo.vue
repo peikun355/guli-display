@@ -29,10 +29,10 @@
 
       <!-- 课程简介 TODO -->
       <el-form-item label="课程简介">
-        <el-input v-model="courseInfo.description"/>
-      </el-form-item>
 
+      </el-form-item>
       <quill-editor ref="QuillEditor" class=".editor" v-model="courseInfo.description" :options="editorOption"/>
+
 
 
       <!-- 课程封面 TODO -->
@@ -156,9 +156,19 @@ export default {
 
     },
     next() {
-      course.addCourse(this.courseInfo).then(resp=>{
-        this.$emit("next",resp.data.id)
-      })
+      if (this.$store.state.isUpdateCourseInfo){
+        course.updateCourse(this.courseInfo).then(resp=>{
+          this.$emit("next",this.courseInfo.id)
+          this.$store.isUpdateCourseInfo=false
+        })
+      }else {
+        course.addCourse(this.courseInfo).then(resp=>{
+          this.courseInfo.id=resp.data.id
+          this.$emit("next",resp.data.id)
+        })
+      }
+
+
 
     },
     //二级联动课程分类
